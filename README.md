@@ -1,2 +1,2 @@
 # flyd-obj
-Functions for working with stream in objects.
+Functions for working with Flyd stream in objects.
