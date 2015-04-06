@@ -1,6 +1,6 @@
 {
   "name": "flyd-obj",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Functions for working with Flyd streams in objects.",
   "main": "obj.js",
   "directories": {
@@ -26,6 +26,6 @@
   },
   "homepage": "https://github.com/paldepind/flyd-obj",
   "dependencies": {
-    "flyd": "0.0.6"
+    "flyd": "0.0.7"
   }
 }
