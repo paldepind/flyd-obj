@@ -1,6 +1,6 @@
 {
   "name": "flyd-obj",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Functions for working with Flyd streams in objects.",
   "main": "obj.js",
   "directories": {

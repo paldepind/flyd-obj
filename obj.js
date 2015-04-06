@@ -1,19 +1,16 @@
 var flyd = require('flyd');
 
-function wrapProps(from, to) {
+exports.streamProps = function(from) {
+  var to = {};
   for (var key in from) {
     if (from.hasOwnProperty(key)) {
       to[key] = flyd.stream(from[key]);
     }
   }
   return to;
-}
-
-exports.streamProps = function(obj) {
-  return wrapProps(obj, {});
 };
 
-exports.extractProps = function extract(obj) {
+var extractProps = exports.extractProps = function(obj) {
   var newObj = {};
   for (var key in obj) {
     if (obj.hasOwnProperty(key)) {
@@ -23,21 +20,9 @@ exports.extractProps = function extract(obj) {
   return newObj;
 };
 
-function update(s, keys) {
-  var obj = {};
-  keys.map(function(key) {
-    obj[key] = s[key].val;
-  });
-  s(obj);
-}
-
 exports.stream = function(obj) {
-  var s = flyd.stream();
-  wrapProps(obj, s);
-  var keys = Object.keys(obj);
-  var upd = update.bind(null, s, keys);
-  keys.map(function(key) {
-    flyd.map(upd, s[key]);
+  var streams = Object.keys(obj).map(function(key) { return obj[key]; });
+  return flyd.stream(streams, function() {
+    return extractProps(obj);
   });
-  return s;
 };

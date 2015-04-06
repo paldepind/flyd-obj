@@ -15,20 +15,14 @@ describe('stream props', function() {
 });
 describe('stream object', function() {
   var o = {one: 1, two: 2, three: 3};
-  it('converts properties to streams', function() {
-    var oS = obj.stream(o);
-    assert.equal(o.one, oS.one());
-    assert.equal(o.two, oS.two());
-    assert.equal(o.three, oS.three());
-  });
   it('returns a stream', function() {
-    var oS = obj.stream(o);
+    var oS = obj.stream(obj.streamProps(o));
     assert(flyd.isStream(oS));
   });
   it('flow unwrapped object down stream when props change', function() {
-    var oS = obj.stream(o);
+    var oS = obj.streamProps(o);
     var result = [];
-    flyd.map(function(o) { result.push(o); }, oS);
+    flyd.map(function(o) { result.push(o); }, obj.stream(oS));
     oS.one(4);
     oS.three(4);
     oS.two(4);
@@ -43,14 +37,14 @@ describe('stream object', function() {
 describe('extract', function() {
   it('extracts the values from streams in object', function() {
     var oS = {one: stream(1), two: stream(2), three: stream(3)};
-    var o = obj.extract(oS);
+    var o = obj.extractProps(oS);
     assert.equal(o.one, oS.one());
     assert.equal(o.two, oS.two());
     assert.equal(o.three, oS.three());
   });
   it('handles values that are not streams', function() {
     var oS = {one: stream(1), undef: undefined, nll: null, two: 2};
-    var o = obj.extract(oS);
+    var o = obj.extractProps(oS);
     assert.equal(o.one, oS.one());
     assert.equal(o.undef, oS.undef);
     assert.equal(o.nll, oS.nll);
