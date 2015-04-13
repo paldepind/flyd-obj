@@ -14,7 +14,7 @@ var extractProps = exports.extractProps = function(obj) {
   var newObj = {};
   for (var key in obj) {
     if (obj.hasOwnProperty(key)) {
-      newObj[key] = flyd.isStream(obj[key]) ? obj[key].val : obj[key];
+      newObj[key] = flyd.isStream(obj[key]) ? obj[key]() : obj[key];
     }
   }
   return newObj;
