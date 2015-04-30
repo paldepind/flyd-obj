@@ -20,6 +20,10 @@
     "obj"
   ],
   "author": "Simon Friis Vindum",
+  "contributors": [{
+    "name": "Adam Nalisnick",
+    "email": "theadam4257@gmail.com"
+  }],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/paldepind/flyd-obj/issues"
